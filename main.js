@@ -4,13 +4,15 @@ require([
     "esri/layers/TileLayer",
     "esri/Basemap",
     "esri/layers/FeatureLayer",
+    "esri/widgets/LayerList",
     "dojo/domReady!",
     ], function (
     Map,
     SceneView,
     TileLayer,
     Basemap,
-    FeatureLayer
+    FeatureLayer,
+    LayerList
     ) { 
         const satelliteLayer = new TileLayer({
             url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
@@ -54,6 +56,13 @@ require([
             //   ui: {
             //     components: ["zoom"]
             //    }
+          });
+          const layerList = new LayerList({
+            view: view
+          });
+          
+          view.ui.add(layerList, {
+            position: "top-right"
           });
 
           
