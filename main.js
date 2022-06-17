@@ -1,4 +1,5 @@
 require([
+    // Imports from ArcGis Library
     "esri/Map",
     "esri/views/SceneView",
     "esri/layers/TileLayer",
@@ -9,6 +10,7 @@ require([
     "esri/Graphic",
     "dojo/domReady!",
     ], function (
+        // Declared functions for the Imports
     Map,
     SceneView,
     TileLayer,
@@ -18,6 +20,7 @@ require([
     request,
     Graphic
     ) { 
+        // Map and Globe layout with zoom on to the cities and landmaass
         const satelliteLayer = new TileLayer({
             url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
             title: "satellite"
@@ -68,6 +71,8 @@ require([
           view.ui.add(layerList, {
             position: "top-right"
           });
+          
+          // Forms for uploadeds content onto the app 
 
           const uploadForm = document.getElementById("uploadForm");
 
@@ -78,6 +83,7 @@ require([
                 generateFeatureCollection(uploadForm)
             } 
           });
+        //    Function for the form to send data to the server and return
           function generateFeatureCollection(uploadFormNode) {
             const generateRequestParams = {
                 filetype: "shapefile",
@@ -95,6 +101,7 @@ require([
                 console.log(response)
                 })
             }
+            // Creates graphics (layer and graphics)
             function createFeaturesGraphics(layer) {
                 console.log(layer)
                 return layer.featureSet.features.map(function (feature) {
@@ -108,6 +115,7 @@ require([
                   title: 'User uploaded shapefile'
                 });
               }
+            //    This function takes the zip file and implements it onto the Globe and Map
               function addShapefileToMap(featureCollection) {
                 let sourceGraphics = [];
                 const collectionLayers = featureCollection.layers;
